@@ -1,0 +1,32 @@
+NSFW: May be a property of the whole subreddit, or may be in the body text.
+
+links that appear in the body need to be encrypted
+
+
+
+
+ALTER TABLE reddit 
+ADD COLUMN ups VARCHAR,
+ADD COLUMN downs VARCHAR,
+ADD COLUMN parent_id VARCHAR,
+ADD COLUMN body VARCHAR,
+ADD COLUMN subreddit_id VARCHAR,
+ADD COLUMN subreddit VARCHAR,
+ADD COLUMN link_id VARCHAR,
+ADD COLUMN id VARCHAR,
+ADD COLUMN created_utc VARCHAR,
+ADD COLUMN author VARCHAR;
+
+UPDATE reddit
+SET id = comment->>'id',
+ups = comment->>'ups',
+downs = comment->>'downs',
+parent_id = comment->>'parent_id',
+body = comment->>'body',
+subreddit_id = comment->>'subreddit_id',
+subreddit = comment->>'subreddit',
+link_id = comment->>'link_id',
+created_utc = comment->>'created_utc',
+author = comment->>'author';
+
+
